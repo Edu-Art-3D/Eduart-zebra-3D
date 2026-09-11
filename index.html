@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduArt 3D</title>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      width: 100vw;
+      height: 100vh;
+      background-color: #ffffff;
+      font-family: system-ui, -apple-system, sans-serif;
+      position: relative;
+    }
+
+    /* مكان اللوجو في الأعلى على اليمين فوق المجسم */
+    .brand-logo {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 65px;
+      height: auto;
+      z-index: 9999;
+    }
+
+    /* تحديد ارتفاع المجسم بحيث يترك مساحة كافية للأسفل لزر الواقع المعزز */
+    model-viewer {
+      width: 100vw;
+      height: calc(100vh - 120px);
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- صورة اللوجو -->
+  <img src="logo.PNG" alt="EduArt Logo" class="brand-logo">
+
+  <!-- عرض المجسم الـ 3D -->
+  <model-viewer 
+    src="zebra.glb" 
+    alt="EduArt 3D Model" 
+    camera-controls 
+    ar 
+    ar-modes="webxr scene-viewer quick-look"
+    ar-scale="auto"
+    ar-placement="floor"
+    scale="1000 1000 1000">
+  </model-viewer>
+
+</body>
+</html>
