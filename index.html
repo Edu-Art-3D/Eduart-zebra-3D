@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>EduArt 3D</title>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #ffffff;
+      font-family: system-ui, -apple-system, sans-serif;
+      position: relative;
+    }
+
+    #protected-content {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .brand-logo {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 60px;
+      height: auto;
+      z-index: 999999;
+    }
+
+    /* أبعاد مرنة ومضمونة تترك 25% من الشاشة فارغة للأزرار */
+    model-viewer {
+      width: 100%;
+      height: 75vh;
+      margin-top: 10px;
+      background-color: #ffffff;
+      --ar-button-display: block;
+    }
+
+    /* زرار الواقع المعزز AR ثابت في أسفل الشاشة تماماً ومستقل عن أبعاد الحيوان */
+    model-viewer::part(ar-button) {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ffffff;
+      border-radius: 30px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 999998;
+      padding: 12px 24px;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- سكريبت فحص المفتاح وحماية الصفحة -->
+  <script>
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const key = urlParams.get('key');
+      const SECRET_KEY = "edu2026";
+      const TRAP_PAGE_URL = "https://edu-art-3d-book.my.canva.site/land-animals-trap";
+
+      if (key === SECRET_KEY) {
+        window.addEventListener('DOMContentLoaded', () => {
+          document.getElementById('protected-content').style.display = 'block';
+        });
+      } else {
+        window.location.href = TRAP_PAGE_URL;
+      }
+    })();
+  </script>
+
+  <!-- المحتوى المحمي بالكامل -->
+  <div id="protected-content">
+    <img src="logo.PNG" alt="EduArt Logo" class="brand-logo">
+
+    <model-viewer 
+      src="zebra.glb" 
+      alt="EduArt 3D Model" 
+      camera-controls 
+      ar 
+      ar-modes="webxr scene-viewer quick-look"
+      ar-scale="auto"
+      ar-placement="floor"
+      scale= "1000 1000 1000"
+      bounds="tight">
+    </model-viewer>
+  </div>
+
+</body>
+</html>
